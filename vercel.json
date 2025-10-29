@@ -1,8 +1,5 @@
 {
   "version": 2,
-  "functions": { "api/index.ts": { "runtime": "edge" } },
-  "routes": [
-    { "src": "/api/(.*)", "dest": "/api/index.ts" },
-    { "src": "/(.*)", "dest": "/src/$1" }
-  ]
+  "builds": [{ "src": "public/**/*", "use": "@vercel/static" }],
+  "routes": [{ "src": "/(.*)", "dest": "/public/$1" }]
 }
