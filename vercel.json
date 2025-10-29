@@ -1,10 +1,6 @@
 {
   "version": 2,
-  "functions": {
-    "api/index.ts": {
-      "runtime": "vercel-edge@2.5.0"
-    }
-  },
+  "functions": { "api/index.ts": { "runtime": "edge" } },
   "routes": [
     { "src": "/api/(.*)", "dest": "/api/index.ts" },
     { "src": "/(.*)", "dest": "/src/$1" }
