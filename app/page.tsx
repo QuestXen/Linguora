@@ -3,13 +3,7 @@
 import { useWordOfTheDay } from '@/app/hooks/useWordOfTheDay'
 import LanguageToggle from '@/app/components/LanguageToggle'
 import WordCard from '@/app/components/WordCard'
-import {
-  SignedIn,
-  SignedOut,
-  UserButton,
-  SignInButton,
-} from '@clerk/nextjs'
-
+import AuthControls from '@/app/components/AuthControls'
 
 export default function Home() {
   const {
@@ -31,26 +25,7 @@ export default function Home() {
 
         <div className="header-right">
           {/* später kannst du hier auch Notifications reinmachen */}
-          <SignedIn>
-            <UserButton
-              afterSignOutUrl="/"
-              appearance={{
-                elements: {
-                  avatarBox: 'w-10 h-10',
-                },
-              }}
-            />
-          </SignedIn>
-
-          <SignedOut>
-            <SignInButton mode="modal">
-              <button className="clerk-avatar-btn" aria-label="Sign in">
-                <span className="clerk-avatar-icon">
-                  👤
-                </span>
-              </button>
-            </SignInButton>
-          </SignedOut>
+          <AuthControls />
         </div>
       </header>
 
