@@ -1,5 +1,5 @@
 import { NextResponse } from 'next/server'
-import { asc, eq } from 'drizzle-orm'
+import { asc, eq, isNull } from 'drizzle-orm'
 
 import {
   db,
@@ -10,6 +10,7 @@ import {
 } from '@/app/db/client'
 
 const TIMEZONE = process.env.WORD_ROTATION_TZ || 'Europe/Berlin'
+const MAX_ALLOCATION_ATTEMPTS = 5
 
 export const dynamic = 'force-dynamic'
 
@@ -66,46 +67,47 @@ async function findScheduleWithWord(client: QueryableDb, dayKey: string) {
   return schedule
 }
 
-async function scheduleWordForToday(dayKey: string) {
-  const existing = await findScheduleWithWord(db, dayKey)
-  if (existing?.word) {
-    return { word: existing.word, exhausted: false }
-  }
+async function selectNextAvailableWord(client: QueryableDb) {
+  const [candidate] = await client
+    .select({ word: words })
+    .from(words)
+    .leftJoin(wordSchedules, eq(words.slug, wordSchedules.slug))
+    .where(isNull(wordSchedules.slug))
+    .orderBy(asc(words.createdAt), asc(words.slug))
+    .limit(1)
 
-  return db.transaction(async tx => {
-    const current = await findScheduleWithWord(tx, dayKey)
-    if (current?.word) {
-      return { word: current.word, exhausted: false }
+  return candidate?.word ?? null
+}
+
+async function scheduleWordForToday(dayKey: string) {
+  for (let attempt = 0; attempt < MAX_ALLOCATION_ATTEMPTS; attempt += 1) {
+    const existing = await findScheduleWithWord(db, dayKey)
+    if (existing?.word) {
+      return { word: existing.word, exhausted: false }
     }
 
-    const used = await tx
-      .select({ slug: wordSchedules.slug })
-      .from(wordSchedules)
-    const usedSet = new Set(used.map(entry => entry.slug))
-
-    const candidates = await tx
-      .select()
-      .from(words)
-      .orderBy(asc(words.createdAt), asc(words.slug))
-
-    const nextWord = candidates.find(candidate => !usedSet.has(candidate.slug))
-
+    const nextWord = await selectNextAvailableWord(db)
     if (!nextWord) {
       return { word: null, exhausted: true }
     }
 
-    await tx
+    const inserted = await db
       .insert(wordSchedules)
       .values({ scheduledFor: dayKey, slug: nextWord.slug })
       .onConflictDoNothing()
+      .returning({ id: wordSchedules.id })
 
-    const confirmed = await findScheduleWithWord(tx, dayKey)
-    if (confirmed?.word) {
-      return { word: confirmed.word, exhausted: false }
+    if (inserted.length > 0) {
+      return { word: nextWord, exhausted: false }
     }
+  }
 
-    return { word: nextWord, exhausted: false }
-  })
+  const fallback = await findScheduleWithWord(db, dayKey)
+  if (fallback?.word) {
+    return { word: fallback.word, exhausted: false }
+  }
+
+  return { word: null, exhausted: true }
 }
 
 export async function GET() {
