@@ -1,0 +1,183 @@
+{
+  "id": "8f28bb61-8faa-43a9-8739-e6f07cbc6109",
+  "prevId": "00000000-0000-0000-0000-000000000000",
+  "version": "7",
+  "dialect": "postgresql",
+  "tables": {
+    "public.word_schedules": {
+      "name": "word_schedules",
+      "schema": "",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "serial",
+          "primaryKey": true,
+          "notNull": true
+        },
+        "slug": {
+          "name": "slug",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "scheduled_for": {
+          "name": "scheduled_for",
+          "type": "date",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "created_at": {
+          "name": "created_at",
+          "type": "timestamp with time zone",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "now()"
+        }
+      },
+      "indexes": {
+        "word_schedules_scheduled_for_key": {
+          "name": "word_schedules_scheduled_for_key",
+          "columns": [
+            {
+              "expression": "scheduled_for",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            }
+          ],
+          "isUnique": true,
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
+        },
+        "word_schedules_slug_key": {
+          "name": "word_schedules_slug_key",
+          "columns": [
+            {
+              "expression": "slug",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            }
+          ],
+          "isUnique": true,
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
+        }
+      },
+      "foreignKeys": {
+        "word_schedules_slug_words_slug_fk": {
+          "name": "word_schedules_slug_words_slug_fk",
+          "tableFrom": "word_schedules",
+          "tableTo": "words",
+          "columnsFrom": [
+            "slug"
+          ],
+          "columnsTo": [
+            "slug"
+          ],
+          "onDelete": "cascade",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {},
+      "policies": {},
+      "checkConstraints": {},
+      "isRLSEnabled": false
+    },
+    "public.words": {
+      "name": "words",
+      "schema": "",
+      "columns": {
+        "slug": {
+          "name": "slug",
+          "type": "text",
+          "primaryKey": true,
+          "notNull": true
+        },
+        "en_word": {
+          "name": "en_word",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "en_ipa": {
+          "name": "en_ipa",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "en_definition": {
+          "name": "en_definition",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "en_example": {
+          "name": "en_example",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "de_word": {
+          "name": "de_word",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "de_ipa": {
+          "name": "de_ipa",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "de_definition": {
+          "name": "de_definition",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "de_example": {
+          "name": "de_example",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "created_at": {
+          "name": "created_at",
+          "type": "timestamp with time zone",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "now()"
+        },
+        "updated_at": {
+          "name": "updated_at",
+          "type": "timestamp with time zone",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "now()"
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {},
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {},
+      "policies": {},
+      "checkConstraints": {},
+      "isRLSEnabled": false
+    }
+  },
+  "enums": {},
+  "schemas": {},
+  "sequences": {},
+  "roles": {},
+  "policies": {},
+  "views": {},
+  "_meta": {
+    "columns": {},
+    "schemas": {},
+    "tables": {}
+  }
+}

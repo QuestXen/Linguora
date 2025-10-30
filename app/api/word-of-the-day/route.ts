@@ -1,25 +1,14 @@
 import { NextResponse } from 'next/server'
-import path from 'node:path'
-import { promises as fs } from 'node:fs'
+import { asc, eq } from 'drizzle-orm'
 
-interface WordEntry {
-  slug: string
-  en: { word: string; ipa: string; def: string; ex: string }
-  de: { word: string; ipa: string; def: string; ex: string }
-}
+import {
+  db,
+  wordSchedules,
+  words,
+  type QueryableDb,
+  type Word,
+} from '@/app/db/client'
 
-interface WordData {
-  fonts?: Array<{ family: string; url?: string }>
-  entries: WordEntry[]
-}
-
-interface RotationState {
-  history: Array<{ date: string; slug: string }>
-}
-
-const WORDS_PATH = path.join(process.cwd(), 'public', 'words.json')
-const STATE_DIR = path.join(process.cwd(), 'var')
-const STATE_PATH = path.join(STATE_DIR, 'word-rotation.json')
 const TIMEZONE = process.env.WORD_ROTATION_TZ || 'Europe/Berlin'
 
 export const dynamic = 'force-dynamic'
@@ -43,81 +32,108 @@ function formatDateKey(date: Date, timeZone: string) {
   return `${year}-${month}-${day}`
 }
 
-async function readJSON<T>(filePath: string, fallback: T): Promise<T> {
-  try {
-    const content = await fs.readFile(filePath, 'utf8')
-    return JSON.parse(content) as T
-  } catch (error: unknown) {
-    if (
-      typeof error === 'object' &&
-      error !== null &&
-      'code' in error &&
-      (error as { code: string }).code === 'ENOENT'
-    ) {
-      return fallback
+function mapWord(word: Word) {
+  return {
+    slug: word.slug,
+    en: {
+      word: word.enWord,
+      ipa: word.enIpa ?? '',
+      def: word.enDefinition,
+      ex: word.enExample,
+    },
+    de: {
+      word: word.deWord,
+      ipa: word.deIpa ?? '',
+      def: word.deDefinition,
+      ex: word.deExample,
+    },
+  }
+}
+
+async function findScheduleWithWord(client: QueryableDb, dayKey: string) {
+  const schedule = await client.query.wordSchedules.findFirst({
+    where: eq(wordSchedules.scheduledFor, dayKey),
+    with: { word: true },
+  })
+
+  if (schedule && !schedule.word) {
+    await client
+      .delete(wordSchedules)
+      .where(eq(wordSchedules.id, schedule.id))
+    return null
+  }
+
+  return schedule
+}
+
+async function scheduleWordForToday(dayKey: string) {
+  const existing = await findScheduleWithWord(db, dayKey)
+  if (existing?.word) {
+    return { word: existing.word, exhausted: false }
+  }
+
+  return db.transaction(async tx => {
+    const current = await findScheduleWithWord(tx, dayKey)
+    if (current?.word) {
+      return { word: current.word, exhausted: false }
     }
-    throw error
-  }
-}
 
-async function loadWords(): Promise<WordData> {
-  const data = await readJSON<WordData>(WORDS_PATH, { entries: [] })
-  if (!data.entries?.length) {
-    throw new Error('No word entries configured in public/words.json')
-  }
-  return data
-}
+    const used = await tx
+      .select({ slug: wordSchedules.slug })
+      .from(wordSchedules)
+    const usedSet = new Set(used.map(entry => entry.slug))
 
-async function loadState(): Promise<RotationState> {
-  return readJSON<RotationState>(STATE_PATH, { history: [] })
-}
+    const candidates = await tx
+      .select()
+      .from(words)
+      .orderBy(asc(words.createdAt), asc(words.slug))
 
-async function saveState(state: RotationState) {
-  await fs.mkdir(STATE_DIR, { recursive: true })
-  await fs.writeFile(STATE_PATH, JSON.stringify(state, null, 2), 'utf8')
+    const nextWord = candidates.find(candidate => !usedSet.has(candidate.slug))
+
+    if (!nextWord) {
+      return { word: null, exhausted: true }
+    }
+
+    await tx
+      .insert(wordSchedules)
+      .values({ scheduledFor: dayKey, slug: nextWord.slug })
+      .onConflictDoNothing()
+
+    const confirmed = await findScheduleWithWord(tx, dayKey)
+    if (confirmed?.word) {
+      return { word: confirmed.word, exhausted: false }
+    }
+
+    return { word: nextWord, exhausted: false }
+  })
 }
 
 export async function GET() {
   try {
-    const [words, state] = await Promise.all([loadWords(), loadState()])
     const todayKey = formatDateKey(new Date(), TIMEZONE)
+    const result = await scheduleWordForToday(todayKey)
 
-    const today = state.history.find(record => record.date === todayKey)
-    if (today) {
-      const entry = words.entries.find(item => item.slug === today.slug)
-      if (entry) {
-        return NextResponse.json({
-          entry,
-          fonts: words.fonts ?? [],
-          exhausted: false,
-          date: todayKey,
-        })
-      }
-      // Fall back to repairing state when slug removed from dataset
-      state.history = state.history.filter(record => record.date !== todayKey)
-    }
+    if (!result.word) {
+      const hasWords = await db
+        .select({ slug: words.slug })
+        .from(words)
+        .limit(1)
 
-    const usedSlugs = new Set(state.history.map(record => record.slug))
-    const available = words.entries.filter(entry => !usedSlugs.has(entry.slug))
-
-    if (!available.length) {
       return NextResponse.json({
         entry: null,
-        fonts: words.fonts ?? [],
+        fonts: [],
         exhausted: true,
         date: todayKey,
         message:
-          'All configured words have been delivered. Add more entries to public/words.json.',
+          hasWords.length > 0
+            ? 'All configured words have been delivered. Insert additional rows into the words table to continue the rotation.'
+            : 'No words are configured yet. Seed the words table to start the daily rotation.',
       })
     }
 
-    const nextEntry = available[0]
-    state.history.push({ date: todayKey, slug: nextEntry.slug })
-    await saveState(state)
-
     return NextResponse.json({
-      entry: nextEntry,
-      fonts: words.fonts ?? [],
+      entry: mapWord(result.word),
+      fonts: [],
       exhausted: false,
       date: todayKey,
     })
