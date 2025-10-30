@@ -1,51 +1,23 @@
 'use client'
 
-import { useCallback, useEffect, useRef, useState } from 'react'
+import { useCallback, useEffect, useMemo, useRef, useState } from 'react'
 import Image from 'next/image'
+
+import { useInitialSession } from '@/app/components/SessionProvider'
+import type { SessionEnvelope } from '@/app/lib/auth-types'
 
 const FALLBACK_AVATAR = '/avatar-placeholder.svg'
 
 type Provider = 'github' | 'google'
-
-type SessionEnvelope =
-  | {
-      session: {
-        id: string
-        userId: string
-        token: string
-        expiresAt: string
-        createdAt: string
-        updatedAt: string
-        ipAddress?: string | null
-        userAgent?: string | null
-      }
-      user: {
-        id: string
-        name: string
-        email: string
-        image?: string | null
-        emailVerified: boolean
-        createdAt: string
-        updatedAt: string
-        role?: string
-        hasDashboardAccess?: boolean
-        isBanned?: boolean
-        contributorState?: string
-      }
-      permissions?: {
-        dashboard?: boolean
-        reason?: string | null
-        isContributor?: boolean
-      }
-    }
-  | null
 
 const providerLabels: Record<Provider, string> = {
   github: 'Sign in with GitHub',
   google: 'Sign in with Google',
 }
 
-const normalizeSession = (payload: unknown): SessionEnvelope => {
+type Status = 'initializing' | 'loading' | 'ready' | 'error'
+
+const normalizeSession = (payload: unknown): SessionEnvelope | null => {
   if (!payload || typeof payload !== 'object') return null
   const data =
     'data' in payload && typeof (payload as Record<string, unknown>).data === 'object'
@@ -59,41 +31,59 @@ const normalizeSession = (payload: unknown): SessionEnvelope => {
 
 interface AuthControlsProps {
   mode?: 'default' | 'dashboard'
+  initialSession?: SessionEnvelope | null
 }
 
-export default function AuthControls({ mode = 'default' }: AuthControlsProps = {}) {
-  const [session, setSession] = useState<SessionEnvelope>(null)
-  const [status, setStatus] = useState<'idle' | 'loading' | 'ready' | 'error'>('idle')
+export default function AuthControls({ mode = 'default', initialSession }: AuthControlsProps = {}) {
+  const { initialSession: contextSession, hasInitialValue } = useInitialSession()
+  const bootstrapProvided = initialSession !== undefined || hasInitialValue
+  const bootstrapSession = (initialSession ?? contextSession) ?? null
+
+  const [session, setSession] = useState<SessionEnvelope | null>(bootstrapSession)
+  const [status, setStatus] = useState<Status>(bootstrapProvided ? 'ready' : 'initializing')
   const [authMenuOpen, setAuthMenuOpen] = useState(false)
   const [userMenuOpen, setUserMenuOpen] = useState(false)
   const containerRef = useRef<HTMLDivElement>(null)
-
-  const loadSession = useCallback(async () => {
-    setStatus('loading')
-    try {
-      const response = await fetch('/api/auth/get-session', {
-        method: 'GET',
-        credentials: 'include',
-      })
-      if (!response.ok) {
-        setSession(null)
-        setStatus('ready')
-        return
-      }
-      const body = await response.json().catch(() => null)
-      const normalized = normalizeSession(body)
-      setSession(normalized)
-      setStatus('ready')
-    } catch (err) {
-      console.error('Failed to load session:', err)
-      setSession(null)
-      setStatus('error')
-    }
-  }, [])
+  const bootstrapRef = useRef<SessionEnvelope | null>(bootstrapSession)
 
   useEffect(() => {
-    void loadSession()
-  }, [loadSession])
+    if (!bootstrapProvided) return
+    if (bootstrapRef.current === bootstrapSession) return
+    bootstrapRef.current = bootstrapSession
+    setSession(bootstrapSession)
+    setStatus('ready')
+  }, [bootstrapProvided, bootstrapSession])
+
+  const loadSession = useCallback(
+    async ({ silent = false }: { silent?: boolean } = {}) => {
+      if (!silent) {
+        setStatus('loading')
+      }
+      try {
+        const response = await fetch('/api/auth/get-session', {
+          method: 'GET',
+          credentials: 'include',
+        })
+        if (!response.ok) {
+          setSession(null)
+          setStatus('ready')
+          return
+        }
+        const body = await response.json().catch(() => null)
+        const normalized = normalizeSession(body)
+        setSession(normalized)
+        setStatus('ready')
+      } catch (err) {
+        console.error('Failed to load session:', err)
+        setStatus('error')
+      }
+    },
+    [],
+  )
+
+  useEffect(() => {
+    void loadSession({ silent: bootstrapProvided })
+  }, [bootstrapProvided, loadSession])
 
   useEffect(() => {
     const handleDocumentClick = (event: MouseEvent) => {
@@ -118,7 +108,14 @@ export default function AuthControls({ mode = 'default' }: AuthControlsProps = {
     }
   }, [])
 
+  useEffect(() => {
+    if (!session) {
+      setUserMenuOpen(false)
+    }
+  }, [session])
+
   const isBusy = status === 'loading'
+  const showSkeleton = (status === 'initializing' || status === 'loading') && !session
 
   const startSignIn = useCallback(
     async (provider: Provider) => {
@@ -153,13 +150,12 @@ export default function AuthControls({ mode = 'default' }: AuthControlsProps = {
           return
         }
 
-        // Fallback: reload to refresh session state
         window.location.reload()
       } catch (err) {
         console.error('Failed to start social sign-in:', err)
       }
     },
-    [setAuthMenuOpen]
+    [],
   )
 
   const signOut = useCallback(async () => {
@@ -176,29 +172,32 @@ export default function AuthControls({ mode = 'default' }: AuthControlsProps = {
     }
   }, [loadSession])
 
-  const toggleAuthMenu = () => {
+  const toggleAuthMenu = useCallback(() => {
+    if (showSkeleton) return
     setUserMenuOpen(false)
     setAuthMenuOpen(open => !open)
-  }
+  }, [showSkeleton])
 
-  const toggleUserMenu = () => {
+  const toggleUserMenu = useCallback(() => {
+    if (showSkeleton) return
     setAuthMenuOpen(false)
     setUserMenuOpen(open => !open)
-  }
+  }, [showSkeleton])
 
-  if (session) {
-    const avatarSrc = session.user.image || FALLBACK_AVATAR
-    const shouldShowDashboard = mode === 'default' && !!session.permissions?.dashboard
-    const primaryActionLabel = mode === 'dashboard' ? 'Home' : 'Dashboard'
-    const handlePrimaryAction = () => {
-      if (mode === 'dashboard') {
-        window.location.href = '/'
-      } else {
-        window.location.href = '/dashboard'
+  const avatarContent = useMemo(() => {
+    if (session) {
+      const avatarSrc = session.user.image || FALLBACK_AVATAR
+      const shouldShowDashboard = mode === 'default' && !!session.permissions?.dashboard
+      const primaryActionLabel = mode === 'dashboard' ? 'Home' : 'Dashboard'
+      const handlePrimaryAction = () => {
+        if (mode === 'dashboard') {
+          window.location.href = '/'
+        } else {
+          window.location.href = '/dashboard'
+        }
       }
-    }
-    return (
-      <div className="auth-controls" ref={containerRef}>
+
+      return (
         <div className="auth-dropdown">
           <button
             type="button"
@@ -206,6 +205,7 @@ export default function AuthControls({ mode = 'default' }: AuthControlsProps = {
             onClick={toggleUserMenu}
             aria-haspopup="menu"
             aria-expanded={userMenuOpen}
+            aria-label="Open account menu"
           >
             <Image
               src={avatarSrc}
@@ -231,12 +231,14 @@ export default function AuthControls({ mode = 'default' }: AuthControlsProps = {
             </div>
           ) : null}
         </div>
-      </div>
-    )
-  }
+      )
+    }
 
-  return (
-    <div className="auth-controls" ref={containerRef}>
+    if (showSkeleton) {
+      return <div className="auth-avatar-skeleton" aria-hidden="true" />
+    }
+
+    return (
       <div className="auth-dropdown">
         <button
           type="button"
@@ -264,6 +266,23 @@ export default function AuthControls({ mode = 'default' }: AuthControlsProps = {
           </div>
         ) : null}
       </div>
+    )
+  }, [
+    authMenuOpen,
+    isBusy,
+    mode,
+    session,
+    showSkeleton,
+    signOut,
+    startSignIn,
+    toggleAuthMenu,
+    toggleUserMenu,
+    userMenuOpen,
+  ])
+
+  return (
+    <div className="auth-controls" ref={containerRef}>
+      <div className="auth-avatar-shell">{avatarContent}</div>
     </div>
   )
 }

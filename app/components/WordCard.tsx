@@ -9,16 +9,26 @@ interface WordCardProps {
   isExhausted: boolean
   emptyText: string
   fallbackMessage?: string | null
+  className?: string
+  contentClassName?: string
 }
 
-export default function WordCard({ entry, lang, isExhausted, emptyText, fallbackMessage }: WordCardProps) {
+export default function WordCard({
+  entry,
+  lang,
+  isExhausted,
+  emptyText,
+  fallbackMessage,
+  className,
+  contentClassName,
+}: WordCardProps) {
   if (!entry && !isExhausted) return null
 
   if (isExhausted || !entry) {
     const text = fallbackMessage && fallbackMessage.trim().length > 0 ? fallbackMessage : emptyText
     return (
-      <div className="card">
-        <div className="card-content">
+      <div className={`card${className ? ` ${className}` : ''}`}>
+        <div className={`card-content${contentClassName ? ` ${contentClassName}` : ''}`}>
           <p className="word"></p>
           <p className="pronunciation is-hidden"></p>
           <p className="definition">{text}</p>
@@ -38,8 +48,12 @@ export default function WordCard({ entry, lang, isExhausted, emptyText, fallback
   const hasExample = example.length > 0
 
   return (
-    <div className="card">
-      <div className={`card-content ${!hasIPA ? 'no-ipa' : ''}`}>
+    <div className={`card${className ? ` ${className}` : ''}`}>
+      <div
+        className={`card-content ${!hasIPA ? 'no-ipa' : ''}${
+          contentClassName ? ` ${contentClassName}` : ''
+        }`}
+      >
         <p className="word">{word}</p>
         <p className={`pronunciation ${!hasIPA ? 'is-hidden' : ''}`}>{ipa}</p>
         {hasDefinition ? <p className="definition">{definition}</p> : null}
