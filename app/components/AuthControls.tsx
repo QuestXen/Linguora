@@ -1,6 +1,6 @@
 'use client'
 
-import { useCallback, useEffect, useMemo, useState } from 'react'
+import { useCallback, useEffect, useRef, useState } from 'react'
 import Image from 'next/image'
 
 const FALLBACK_AVATAR = '/avatar-placeholder.svg'
@@ -32,8 +32,8 @@ type SessionEnvelope =
   | null
 
 const providerLabels: Record<Provider, string> = {
-  github: 'GitHub',
-  google: 'Google',
+  github: 'Sign in with GitHub',
+  google: 'Sign in with Google',
 }
 
 const normalizeSession = (payload: unknown): SessionEnvelope => {
@@ -51,6 +51,9 @@ const normalizeSession = (payload: unknown): SessionEnvelope => {
 export default function AuthControls() {
   const [session, setSession] = useState<SessionEnvelope>(null)
   const [status, setStatus] = useState<'idle' | 'loading' | 'ready' | 'error'>('idle')
+  const [authMenuOpen, setAuthMenuOpen] = useState(false)
+  const [userMenuOpen, setUserMenuOpen] = useState(false)
+  const containerRef = useRef<HTMLDivElement>(null)
 
   const loadSession = useCallback(async () => {
     setStatus('loading')
@@ -79,45 +82,75 @@ export default function AuthControls() {
     void loadSession()
   }, [loadSession])
 
-  const startSignIn = useCallback(async (provider: Provider) => {
-    try {
-      const response = await fetch('/api/auth/sign-in/social', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        credentials: 'include',
-        body: JSON.stringify({
-          provider,
-          callbackURL: window.location.href,
-          errorCallbackURL: window.location.href,
-        }),
-      })
+  useEffect(() => {
+    const handleDocumentClick = (event: MouseEvent) => {
+      const target = event.target as Node
+      if (!containerRef.current || containerRef.current.contains(target)) return
+      setAuthMenuOpen(false)
+      setUserMenuOpen(false)
+    }
 
-      const body = await response.json().catch(() => null)
-      const redirectUrl =
-        (body && typeof body === 'object' && 'url' in body && typeof body.url === 'string'
-          ? (body.url as string)
-          : null) ?? null
-      const shouldRedirect =
-        !!(body && typeof body === 'object' && 'redirect' in body && body.redirect)
-
-      if (shouldRedirect && redirectUrl) {
-        window.location.href = redirectUrl
-        return
+    const handleKeyDown = (event: KeyboardEvent) => {
+      if (event.key === 'Escape') {
+        setAuthMenuOpen(false)
+        setUserMenuOpen(false)
       }
+    }
 
-      if (redirectUrl) {
-        window.location.href = redirectUrl
-        return
-      }
-
-      // Fallback: reload to refresh session state
-      window.location.reload()
-    } catch (err) {
-      console.error('Failed to start social sign-in:', err)
+    document.addEventListener('click', handleDocumentClick)
+    document.addEventListener('keydown', handleKeyDown)
+    return () => {
+      document.removeEventListener('click', handleDocumentClick)
+      document.removeEventListener('keydown', handleKeyDown)
     }
   }, [])
 
+  const isBusy = status === 'loading'
+
+  const startSignIn = useCallback(
+    async (provider: Provider) => {
+      setAuthMenuOpen(false)
+      try {
+        const response = await fetch('/api/auth/sign-in/social', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          credentials: 'include',
+          body: JSON.stringify({
+            provider,
+            callbackURL: window.location.href,
+            errorCallbackURL: window.location.href,
+          }),
+        })
+
+        const body = await response.json().catch(() => null)
+        const redirectUrl =
+          (body && typeof body === 'object' && 'url' in body && typeof body.url === 'string'
+            ? (body.url as string)
+            : null) ?? null
+        const shouldRedirect =
+          !!(body && typeof body === 'object' && 'redirect' in body && body.redirect)
+
+        if (shouldRedirect && redirectUrl) {
+          window.location.href = redirectUrl
+          return
+        }
+
+        if (redirectUrl) {
+          window.location.href = redirectUrl
+          return
+        }
+
+        // Fallback: reload to refresh session state
+        window.location.reload()
+      } catch (err) {
+        console.error('Failed to start social sign-in:', err)
+      }
+    },
+    [setAuthMenuOpen]
+  )
+
   const signOut = useCallback(async () => {
+    setUserMenuOpen(false)
     try {
       await fetch('/api/auth/sign-out', {
         method: 'POST',
@@ -130,50 +163,75 @@ export default function AuthControls() {
     }
   }, [loadSession])
 
-  const statusLabel = useMemo(() => {
-    if (status === 'loading') return 'Checking session...'
-    if (status === 'error') return 'Session error'
-    if (!session) return 'Not signed in'
-    return session.user.email || session.user.name || 'Signed in'
-  }, [status, session])
+  const toggleAuthMenu = () => {
+    setUserMenuOpen(false)
+    setAuthMenuOpen(open => !open)
+  }
+
+  const toggleUserMenu = () => {
+    setAuthMenuOpen(false)
+    setUserMenuOpen(open => !open)
+  }
 
   if (session) {
     const avatarSrc = session.user.image || FALLBACK_AVATAR
     return (
-      <div className="auth-controls">
-        <div className="auth-user">
-          <span className="auth-label">{statusLabel}</span>
-          <div className="auth-avatar">
+      <div className="auth-controls" ref={containerRef}>
+        <div className="auth-dropdown">
+          <button
+            type="button"
+            className="auth-avatar-button"
+            onClick={toggleUserMenu}
+            aria-haspopup="menu"
+            aria-expanded={userMenuOpen}
+          >
             <Image
               src={avatarSrc}
               alt={session.user.name ?? 'User Avatar'}
               width={40}
               height={40}
             />
-          </div>
+          </button>
+          {userMenuOpen ? (
+            <div role="menu" className="auth-dropdown-menu">
+              <button type="button" className="auth-dropdown-item" onClick={signOut}>
+                Log out
+              </button>
+            </div>
+          ) : null}
         </div>
-        <button type="button" className="auth-button" onClick={signOut}>
-          Sign out
-        </button>
       </div>
     )
   }
 
   return (
-    <div className="auth-controls">
-      <span className="auth-label">{statusLabel}</span>
-      <div className="auth-buttons">
-        {(Object.keys(providerLabels) as Provider[]).map(provider => (
-          <button
-            key={provider}
-            type="button"
-            className="auth-button"
-            onClick={() => startSignIn(provider)}
-            disabled={status === 'loading'}
-          >
-            Sign in with {providerLabels[provider]}
-          </button>
-        ))}
+    <div className="auth-controls" ref={containerRef}>
+      <div className="auth-dropdown">
+        <button
+          type="button"
+          className="auth-trigger"
+          onClick={toggleAuthMenu}
+          aria-haspopup="menu"
+          aria-expanded={authMenuOpen}
+          disabled={isBusy}
+        >
+          Sign In
+        </button>
+        {authMenuOpen ? (
+          <div role="menu" className="auth-dropdown-menu">
+            {(Object.keys(providerLabels) as Provider[]).map(provider => (
+              <button
+                key={provider}
+                type="button"
+                className="auth-dropdown-item"
+                onClick={() => startSignIn(provider)}
+                disabled={isBusy}
+              >
+                {providerLabels[provider]}
+              </button>
+            ))}
+          </div>
+        ) : null}
       </div>
     </div>
   )
