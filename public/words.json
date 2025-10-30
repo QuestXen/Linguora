@@ -1,0 +1,1057 @@
+{
+  "fonts": [
+    {
+      "family": "Poppins",
+      "url": "https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;800&display=swap"
+    },
+    {
+      "family": "Domine",
+      "url": "https://fonts.googleapis.com/css2?family=Domine:wght@400..700&display=swap"
+    },
+    {
+      "family": "Playfair Display",
+      "url": "https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&display=swap"
+    },
+    {
+      "family": "Merriweather",
+      "url": "https://fonts.googleapis.com/css2?family=Merriweather:wght@700&display=swap"
+    }
+  ],
+  "entries": [
+    {
+      "slug": "serendipity",
+      "en": {
+        "word": "Serendipity",
+        "ipa": "/ˌsɛrənˈdɪpɪti/",
+        "def": "The occurrence and development of events by chance in a happy or beneficial way.",
+        "ex": "A fortunate stroke of serendipity."
+      },
+      "de": {
+        "word": "Serendipität",
+        "ipa": "/zeʁɛndiˌpiːtiˈtɛːt/",
+        "def": "Das zufällige Finden von etwas Wertvollem oder Nützlichem, nach dem man nicht gezielt gesucht hat.",
+        "ex": "Ein Moment der Serendipität führte zur entscheidenden Entdeckung."
+      }
+    },
+    {
+      "slug": "ephemeral",
+      "en": {
+        "word": "Ephemeral",
+        "ipa": "/ɪˈfɛmərəl/",
+        "def": "Lasting for a very short time.",
+        "ex": "The beauty of the sunset was ephemeral."
+      },
+      "de": {
+        "word": "Ephemer",
+        "ipa": "/eˈfeːmɛʁ/",
+        "def": "Nur sehr kurze Zeit andauernd; vergänglich.",
+        "ex": "Die Freude war ephemer und verflog rasch."
+      }
+    },
+    {
+      "slug": "sonder",
+      "en": {
+        "word": "Sonder",
+        "ipa": "/ˈsɒndə/",
+        "def": "The realization that each passerby has a life as vivid and complex as your own.",
+        "ex": "On the train, he felt a sudden sense of sonder."
+      },
+      "de": {
+        "word": "Sonder",
+        "ipa": "/ˈzɔndɐ/",
+        "def": "Die Erkenntnis, dass jeder Fremde ein ebenso lebhaftes und komplexes Leben führt wie man selbst.",
+        "ex": "Im Bus spürte sie plötzlich ein Gefühl von Sonder."
+      }
+    },
+    {
+      "slug": "petrichor",
+      "en": {
+        "word": "Petrichor",
+        "ipa": "/ˈpɛtrɪkɔːr/",
+        "def": "The earthy scent produced when rain falls on dry soil.",
+        "ex": "After the storm, the air was filled with the smell of petrichor."
+      },
+      "de": {
+        "word": "Petrichor",
+        "ipa": "/petʁiˈkoːɐ̯/",
+        "def": "Der erdige Geruch, der entsteht, wenn Regen auf trockenen Boden fällt.",
+        "ex": "Nach dem Gewitter lag der Geruch von Petrichor in der Luft."
+      }
+    },
+    {
+      "slug": "defenestration",
+      "en": {
+        "word": "Defenestration",
+        "ipa": "/diːˌfɛnɪˈstreɪʃən/",
+        "def": "The action of throwing someone out of a window.",
+        "ex": "The historical event is known as the Defenestration of Prague."
+      },
+      "de": {
+        "word": "Defenestration",
+        "ipa": "/defenɛstʁaˈt͡si̯oːn/",
+        "def": "Die Handlung, jemanden aus einem Fenster zu werfen (auch 'Fenstersturz').",
+        "ex": "Das historische Ereignis ist als der Prager Fenstersturz bekannt."
+      }
+    },
+    {
+      "slug": "mellifluous",
+      "en": {
+        "word": "Mellifluous",
+        "ipa": "/məˈlɪfluəs/",
+        "def": "(Of a voice or words) sweet or musical; pleasant to hear.",
+        "ex": "She had a low, mellifluous voice."
+      },
+      "de": {
+        "word": "Wohlklingend",
+        "ipa": "/'voːlklɪŋənt/",
+        "def": "(Von einer Stimme oder Worten) süß oder musikalisch; angenehm zu hören.",
+        "ex": "Er hatte eine tiefe, wohlklingende Stimme."
+      }
+    },
+    {
+      "slug": "quixotic",
+      "en": {
+        "word": "Quixotic",
+        "ipa": "/kwɪkˈsɒtɪk/",
+        "def": "Exceedingly idealistic; unrealistic and impractical.",
+        "ex": "He had a quixotic dream of ending world hunger."
+      },
+      "de": {
+        "word": "Quichottisch",
+        "ipa": "/kɪˈʃɔtɪʃ/",
+        "def": "Übermäßig idealistisch; unrealistisch und unpraktisch (nach Don Quijote).",
+        "ex": "Er hatte den quichottischen Traum, den Welthunger zu beenden."
+      }
+    },
+    {
+      "slug": "sesquipedalian",
+      "en": {
+        "word": "Sesquipedalian",
+        "ipa": "/ˌsɛskwɪpɪˈdeɪliən/",
+        "def": "Characterized by using long words; or (of a word) very long.",
+        "ex": "His sesquipedalian way of speaking made him sound pompous."
+      },
+      "de": {
+        "word": "Sesquipedalisch",
+        "ipa": "/zɛskvipedalɪʃ/",
+        "def": "Sich durch die Verwendung langer Wörter auszeichnend; oder (von einem Wort) sehr lang.",
+        "ex": "Seine sesquipedalische Ausdrucksweise ließ ihn pompös wirken."
+      }
+    },
+    {
+      "slug": "obfuscate",
+      "en": {
+        "word": "Obfuscate",
+        "ipa": "/ˈɒbfəskeɪt/",
+        "def": "To deliberately make something unclear or harder to understand.",
+        "ex": "The politician tried to obfuscate the issue."
+      },
+      "de": {
+        "word": "Obfuskieren",
+        "ipa": "/ɔpfʊsˈkiːʁən/",
+        "def": "Etwas absichtlich unklar oder schwerer verständlich machen; verschleiern.",
+        "ex": "Der Politiker versuchte, das Thema zu obfuskieren."
+      }
+    },
+    {
+      "slug": "limerence",
+      "en": {
+        "word": "Limerence",
+        "ipa": "/ˈlɪmərəns/",
+        "def": "The state of being infatuated or obsessed with another person, typically experienced involuntarily.",
+        "ex": "It wasn't love, just a passing case of limerence."
+      },
+      "de": {
+        "word": "Limerenz",
+        "ipa": "/lɪməˈʁɛnt͡s/",
+        "def": "Ein Zustand der Verliebtheit oder Besessenheit von einer anderen Person, der typischerweise unwillkürlich erlebt wird.",
+        "ex": "Es war keine Liebe, nur ein vorübergehender Fall von Limerenz."
+      }
+    },
+    {
+      "slug": "phosphenes",
+      "en": {
+        "word": "Phosphenes",
+        "ipa": "/ˈfɒsfiːnz/",
+        "def": "The spots of light or \"stars\" seen after rubbing one's eyes or applying pressure to them.",
+        "ex": "When I rubbed my tired eyes, bright phosphenes danced in my vision."
+      },
+      "de": {
+        "word": "Phosphene",
+        "ipa": "/fɔsˈfeːnə/",
+        "def": "Die Lichtflecken oder „Sterne“, die man sieht, nachdem man sich die Augen gerieben oder Druck darauf ausgeübt hat.",
+        "ex": "Als ich meine müden Augen rieb, tanzten helle Phosphene vor meinem inneren Auge."
+      }
+    },
+    {
+      "slug": "alexithymia",
+      "en": {
+        "word": "Alexithymia",
+        "ipa": "/əˌlɛksɪˈθaɪmiə/",
+        "def": "A difficulty in identifying, describing, and processing one's own emotions.",
+        "ex": "He suffers from alexithymia and struggles to express how he feels."
+      },
+      "de": {
+        "word": "Alexithymie",
+        "ipa": "/alɛksityˈmiː/",
+        "def": "Die Schwierigkeit, eigene Emotionen zu identifizieren, zu beschreiben und zu verarbeiten.",
+        "ex": "Er leidet an Alexithymie und es fällt ihm schwer auszudrücken, wie er sich fühlt."
+      }
+    },
+    {
+      "slug": "apophenia",
+      "en": {
+        "word": "Apophenia",
+        "ipa": "/æpoʊˈfiːniə/",
+        "def": "The tendency to perceive meaningful connections or patterns in random or unrelated things.",
+        "ex": "Seeing faces in the clouds is a common form of apophenia."
+      },
+      "de": {
+        "word": "Apophänie",
+        "ipa": "/apofeˈniː/",
+        "def": "Die Neigung, in zufälligen oder unzusammenhängenden Dingen bedeutungsvolle Verbindungen oder Muster zu erkennen.",
+        "ex": "Gesichter in Wolken zu sehen, ist eine häufige Form der Apophänie."
+      }
+    },
+  {
+    "slug": "ineffable",
+    "en": {
+      "word": "Ineffable",
+      "ipa": "/ɪnˈɛfəbl/",
+      "def": "Too great or extreme to be expressed or described in words.",
+      "ex": "The mountain view filled him with an ineffable joy."
+    },
+    "de": {
+      "word": "Unaussprechlich",
+      "ipa": "/ʊnˌaʊsˈʃpʁɛçlɪç/",
+      "def": "Zu groß oder extrem, um in Worte gefasst zu werden.",
+      "ex": "Der Anblick der Berge erfüllte sie mit unaussprechlicher Freude."
+    }
+  },
+  {
+    "slug": "liminal",
+    "en": {
+      "word": "Liminal",
+      "ipa": "/ˈlɪmɪnəl/",
+      "def": "Relating to a transitional or initial stage; on a threshold.",
+      "ex": "Dawn is a liminal hour between night and day."
+    },
+    "de": {
+      "word": "Liminal",
+      "ipa": "/liˈmiːnal/",
+      "def": "Eine Schwellen- oder Übergangssituation betreffend.",
+      "ex": "Die Morgendämmerung ist eine liminale Stunde zwischen Nacht und Tag."
+    }
+  },
+  {
+    "slug": "halcyon",
+    "en": {
+      "word": "Halcyon",
+      "ipa": "/ˈhælsiən/",
+      "def": "Denoting a period of time in the past that was idyllically happy and peaceful.",
+      "ex": "They often reminisced about the halcyon days of childhood."
+    },
+    "de": {
+      "word": "Friedvoll",
+      "ipa": "/ˈfʁiːtˌfɔl/",
+      "def": "Eine Zeit bezeichnend, die besonders glücklich und friedlich war.",
+      "ex": "Sie erinnerten sich oft an die friedvollen Tage der Kindheit."
+    }
+  },
+  {
+    "slug": "hiraeth",
+    "en": {
+      "word": "Hiraeth",
+      "ipa": "/hɪəˈraɪθ/",
+      "def": "A deep longing for a home or time you can’t return to.",
+      "ex": "Hiraeth tugged at him when he thought of his old town."
+    },
+    "de": {
+      "word": "Hiraeth",
+      "ipa": "/hiˈraɪ̯θ/",
+      "def": "Tiefes Heimweh nach einem Ort oder einer Zeit, zu der man nicht zurückkehren kann.",
+      "ex": "Bei der Erinnerung an seine Heimat spürte er starkes Hiraeth."
+    }
+  },
+  {
+    "slug": "saudade",
+    "en": {
+      "word": "Saudade",
+      "ipa": "/saʊˈdɑːdə/",
+      "def": "A melancholic longing or nostalgic desire for something absent.",
+      "ex": "Listening to old songs filled her with saudade."
+    },
+    "de": {
+      "word": "Saudade",
+      "ipa": "/saʊˈdaːdɛ/",
+      "def": "Melancholische Sehnsucht oder wehmütige Erinnerung nach etwas Abwesendem.",
+      "ex": "Beim Hören alter Lieder überkam sie eine Saudade."
+    }
+  },
+  {
+    "slug": "zeitgeist",
+    "en": {
+      "word": "Zeitgeist",
+      "ipa": "/ˈzaɪtɡaɪst/",
+      "def": "The defining spirit or mood of a particular period of history.",
+      "ex": "The novel captures the zeitgeist of the 2020s."
+    },
+    "de": {
+      "word": "Zeitgeist",
+      "ipa": "/ˈt͡saɪ̯tˌɡaɪ̯st/",
+      "def": "Der charakteristische Geist oder die Stimmung einer Zeit.",
+      "ex": "Der Roman fängt den Zeitgeist der 2020er Jahre ein."
+    }
+  },
+  {
+    "slug": "weltschmerz",
+    "en": {
+      "word": "Weltschmerz",
+      "ipa": "/ˈvɛltʃmɛrts/",
+      "def": "A feeling of melancholy and world-weariness.",
+      "ex": "A wave of weltschmerz washed over him after the news."
+    },
+    "de": {
+      "word": "Weltschmerz",
+      "ipa": "/ˈvɛltˌʃmɛʁt͡s/",
+      "def": "Melancholie und Lebensüberdruss angesichts der Welt.",
+      "ex": "Nach den Nachrichten überkam ihn ein Gefühl von Weltschmerz."
+    }
+  },
+  {
+    "slug": "schadenfreude",
+    "en": {
+      "word": "Schadenfreude",
+      "ipa": "/ˈʃɑːdənˌfrɔɪdə/",
+      "def": "Pleasure derived from another person's misfortune.",
+      "ex": "He felt a twinge of schadenfreude at his rival’s failure."
+    },
+    "de": {
+      "word": "Schadenfreude",
+      "ipa": "/ˈʃaːdn̩ˌfʁɔʏ̯də/",
+      "def": "Freude über das Missgeschick anderer.",
+      "ex": "Bei dem Scheitern seines Rivalen verspürte er Schadenfreude."
+    }
+  },
+  {
+    "slug": "fernweh",
+    "en": {
+      "word": "Fernweh",
+      "ipa": "/ˈfɛʁnveː/",
+      "def": "A longing for faraway places; wanderlust.",
+      "ex": "A bout of Fernweh made her book a spontaneous trip."
+    },
+    "de": {
+      "word": "Fernweh",
+      "ipa": "/ˈfɛʁnveː/",
+      "def": "Sehnsucht nach der Ferne; Reisefieber.",
+      "ex": "Ihr Fernweh ließ sie spontan eine Reise buchen."
+    }
+  },
+  {
+    "slug": "gemutlichkeit",
+    "en": {
+      "word": "Gemütlichkeit",
+      "ipa": "/ɡəˈmjuːtlɪkhaɪt/",
+      "def": "A state of warmth, friendliness, and good cheer; cozy conviviality.",
+      "ex": "Candles and blankets created a sense of Gemütlichkeit."
+    },
+    "de": {
+      "word": "Gemütlichkeit",
+      "ipa": "/ɡəˈmyːtlɪçkaɪ̯t/",
+      "def": "Gefühl von Behaglichkeit, Wärme und Geselligkeit.",
+      "ex": "Kerzen und Decken sorgten für Gemütlichkeit."
+    }
+  },
+  {
+    "slug": "duende",
+    "en": {
+      "word": "Duende",
+      "ipa": "/duːˈɛndeɪ/",
+      "def": "A quality of passion and inspiration in art, especially in music and dance.",
+      "ex": "The singer performed with unmistakable duende."
+    },
+    "de": {
+      "word": "Duende",
+      "ipa": "/duˈɛndɛ/",
+      "def": "Leidenschaftliche, ergreifende Inspiration in der Kunst.",
+      "ex": "Die Sängerin sang mit unverkennbarem Duende."
+    }
+  },
+  {
+    "slug": "wabi-sabi",
+    "en": {
+      "word": "Wabi-sabi",
+      "ipa": "/ˌwɑːbi ˈsɑːbi/",
+      "def": "A Japanese aesthetic valuing imperfection and transience.",
+      "ex": "The cracked teacup embodied wabi-sabi."
+    },
+    "de": {
+      "word": "Wabi-Sabi",
+      "ipa": "/ˌvabiˈzabi/",
+      "def": "Japanische Ästhetik, die Unvollkommenheit und Vergänglichkeit schätzt.",
+      "ex": "Die rissige Teetasse verkörperte Wabi-Sabi."
+    }
+  },
+  {
+    "slug": "mono-no-aware",
+    "en": {
+      "word": "Mono no aware",
+      "ipa": "/ˌmoʊnoʊ noʊ əˈwɑːreɪ/",
+      "def": "An empathy toward things; the bittersweet awareness of impermanence.",
+      "ex": "Cherry blossoms evoke mono no aware."
+    },
+    "de": {
+      "word": "Mono no aware",
+      "ipa": "/ˌmono no aˈvaːʁe/",
+      "def": "Rührende Empfindung gegenüber der Vergänglichkeit der Dinge.",
+      "ex": "Kirschblüten wecken Mono no aware."
+    }
+  },
+  {
+    "slug": "ubuntu",
+    "en": {
+      "word": "Ubuntu",
+      "ipa": "/uːˈbʊntuː/",
+      "def": "A philosophy emphasizing shared humanity: 'I am because we are.'",
+      "ex": "The community project was guided by ubuntu."
+    },
+    "de": {
+      "word": "Ubuntu",
+      "ipa": "/uˈbuntu/",
+      "def": "Philosophie der gemeinsamen Menschlichkeit: „Ich bin, weil wir sind.“",
+      "ex": "Das Gemeinschaftsprojekt folgte dem Gedanken von Ubuntu."
+    }
+  },
+  {
+    "slug": "komorebi",
+    "en": {
+      "word": "Komorebi",
+      "ipa": "/ˌkoʊmoʊˈrɛbi/",
+      "def": "Sunlight filtering through leaves.",
+      "ex": "They walked under komorebi in the quiet park."
+    },
+    "de": {
+      "word": "Komorebi",
+      "ipa": "/komoˈʁeːbi/",
+      "def": "Durch Blätter fallendes Sonnenlicht.",
+      "ex": "Im stillen Park spazierten sie unter Komorebi."
+    }
+  },
+  {
+    "slug": "psithurism",
+    "en": {
+      "word": "Psithurism",
+      "ipa": "/ˈsɪθərɪzəm/",
+      "def": "The sound of wind whispering through trees.",
+      "ex": "Psithurism lulled him to sleep."
+    },
+    "de": {
+      "word": "Blätterrauschen",
+      "ipa": "/ˈblɛtɐˌʁaʊ̯ʃn̩/",
+      "def": "Das Flüstern des Windes in den Bäumen.",
+      "ex": "Das Blätterrauschen wiegte ihn in den Schlaf."
+    }
+  },
+  {
+    "slug": "susurrus",
+    "en": {
+      "word": "Susurrus",
+      "ipa": "/suːˈsʌrəs/",
+      "def": "A soft, whispering or rustling sound.",
+      "ex": "A susurrus of voices filled the hall."
+    },
+    "de": {
+      "word": "Säuseln",
+      "ipa": "/ˈzɔɪ̯zl̩n/",
+      "def": "Leises Flüstern oder Rauschen.",
+      "ex": "Ein Säuseln von Stimmen erfüllte die Halle."
+    }
+  },
+  {
+    "slug": "zephyr",
+    "en": {
+      "word": "Zephyr",
+      "ipa": "/ˈzɛfər/",
+      "def": "A gentle, mild breeze.",
+      "ex": "A cool zephyr drifted through the window."
+    },
+    "de": {
+      "word": "Zephir",
+      "ipa": "/ˈt͡seːfiːɐ̯/",
+      "def": "Ein sanfter, milder Wind.",
+      "ex": "Ein kühler Zephir wehte durchs Fenster."
+    }
+  },
+  {
+    "slug": "palimpsest",
+    "en": {
+      "word": "Palimpsest",
+      "ipa": "/ˈpælɪmpsɛst/",
+      "def": "Something reused or altered but still bearing traces of its earlier form.",
+      "ex": "The city is a palimpsest of eras."
+    },
+    "de": {
+      "word": "Palimpsest",
+      "ipa": "/palɪmpˈzɛst/",
+      "def": "Etwas Überarbeitetes, das Spuren früherer Formen zeigt.",
+      "ex": "Die Stadt ist ein Palimpsest verschiedener Epochen."
+    }
+  },
+  {
+    "slug": "lacuna",
+    "en": {
+      "word": "Lacuna",
+      "ipa": "/ləˈkuːnə/",
+      "def": "An unfilled space, missing part, or gap.",
+      "ex": "There is a lacuna in the records from 1914."
+    },
+    "de": {
+      "word": "Lücke",
+      "ipa": "/ˈlʏkə/",
+      "def": "Eine fehlende Stelle oder ein inhaltlicher Leerraum.",
+      "ex": "In den Aufzeichnungen von 1914 gibt es eine Lücke."
+    }
+  },
+  {
+    "slug": "evanescent",
+    "en": {
+      "word": "Evanescent",
+      "ipa": "/ˌɛvəˈnɛsənt/",
+      "def": "Soon passing out of sight, memory, or existence; quickly fading.",
+      "ex": "They chased the evanescent glow of fireflies."
+    },
+    "de": {
+      "word": "Vergänglich",
+      "ipa": "/fɛɐ̯ˈɡɛŋlɪç/",
+      "def": "Schnell vergehend; nicht von Dauer.",
+      "ex": "Sie jagten dem vergänglichen Leuchten der Glühwürmchen nach."
+    }
+  },
+  {
+    "slug": "numinous",
+    "en": {
+      "word": "Numinous",
+      "ipa": "/ˈnjuːmɪnəs/",
+      "def": "Having a strong spiritual or mysterious quality.",
+      "ex": "The cathedral had a numinous hush."
+    },
+    "de": {
+      "word": "Numinos",
+      "ipa": "/nuˈmiːnoːs/",
+      "def": "Von geheimnisvoller, geistiger Ausstrahlung.",
+      "ex": "Im Dom lag eine numinose Stille."
+    }
+  },
+  {
+    "slug": "iridescent",
+    "en": {
+      "word": "Iridescent",
+      "ipa": "/ˌɪrɪˈdɛsənt/",
+      "def": "Showing luminous colors that seem to change when seen from different angles.",
+      "ex": "An iridescent sheen covered the shell."
+    },
+    "de": {
+      "word": "Schillernd",
+      "ipa": "/ˈʃɪlɐnt/",
+      "def": "In wechselnden, leuchtenden Farben glänzend.",
+      "ex": "Die Muschel hatte einen schillernden Glanz."
+    }
+  },
+  {
+    "slug": "syzygy",
+    "en": {
+      "word": "Syzygy",
+      "ipa": "/ˈsɪzɪdʒi/",
+      "def": "A straight-line configuration of three celestial bodies.",
+      "ex": "During the syzygy, tides were unusually high."
+    },
+    "de": {
+      "word": "Syzygie",
+      "ipa": "/zytsyˈɡiː/",
+      "def": "Geradlinige Anordnung dreier Himmelskörper.",
+      "ex": "Während der Syzygie waren die Gezeiten ungewöhnlich hoch."
+    }
+  },
+  {
+    "slug": "limn",
+    "en": {
+      "word": "Limn",
+      "ipa": "/lɪm/",
+      "def": "To depict or describe in painting or words.",
+      "ex": "The poet limned the city’s hidden corners."
+    },
+    "de": {
+      "word": "Schildern",
+      "ipa": "/ˈʃɪldɐn/",
+      "def": "Etwas bildhaft darstellen oder beschreiben.",
+      "ex": "Die Dichterin schilderte die verborgenen Winkel der Stadt."
+    }
+  },
+  {
+    "slug": "eldritch",
+    "en": {
+      "word": "Eldritch",
+      "ipa": "/ˈɛldrɪtʃ/",
+      "def": "Weird and sinister or ghostly.",
+      "ex": "An eldritch whisper echoed in the hall."
+    },
+    "de": {
+      "word": "Unheimlich",
+      "ipa": "/ʊnˈhaɪ̯mlɪç/",
+      "def": "Seltsam und unheilvoll; geisterhaft.",
+      "ex": "Ein unheimliches Flüstern hallte durch den Flur."
+    }
+  },
+  {
+    "slug": "crepuscular",
+    "en": {
+      "word": "Crepuscular",
+      "ipa": "/krɪˈpʌskjʊlər/",
+      "def": "Relating to twilight; active at dusk or dawn.",
+      "ex": "Deer are often crepuscular animals."
+    },
+    "de": {
+      "word": "Dämmerungs-",
+      "ipa": "/ˈdɛmɐˌʁʊŋs-/",
+      "def": "Die Dämmerung betreffend; in der Dämmerung aktiv.",
+      "ex": "Rehe sind häufig dämmerungsaktive Tiere."
+    }
+  },
+  {
+    "slug": "ultracrepidarian",
+    "en": {
+      "word": "Ultracrepidarian",
+      "ipa": "/ˌʌltrəˌkrɛpɪˈdɛəriən/",
+      "def": "One who gives opinions beyond their knowledge.",
+      "ex": "His ultracrepidarian comments annoyed the experts."
+    },
+    "de": {
+      "word": "Besserwisserisch (ohne Fachkenntnis)",
+      "ipa": "/ˈbɛsɐvɪsɐʁɪʃ/",
+      "def": "Urteile über Dinge fällen, von denen man wenig versteht.",
+      "ex": "Seine ultrakrepidaren Kommentare nervten die Fachleute."
+    }
+  },
+  {
+    "slug": "nudiustertian",
+    "en": {
+      "word": "Nudiustertian",
+      "ipa": "/ˌnjuːdiəsˈtɜːʃən/",
+      "def": "Relating to the day before yesterday.",
+      "ex": "A nudiustertian headline lingered on the site."
+    },
+    "de": {
+      "word": "Vorgestern betreffend",
+      "ipa": "/ˈfoːɐ̯ˌɡɛstɐn bɛˈtʁɛfənd/",
+      "def": "Sich auf den Tag vor gestern beziehend.",
+      "ex": "Eine vorgestern erschienene Schlagzeile blieb online."
+    }
+  },
+  {
+    "slug": "prelapsarian",
+    "en": {
+      "word": "Prelapsarian",
+      "ipa": "/ˌpriːlæpˈsɛəriən/",
+      "def": "Characteristic of an innocent or unspoiled time.",
+      "ex": "The garden had a prelapsarian calm."
+    },
+    "de": {
+      "word": "Ursprünglich-unverdorben",
+      "ipa": "/ʊɐ̯ˈʃpʁʏŋlɪç ʊnfɛɐ̯ˈdɔʁbn̩/",
+      "def": "Eine unschuldige, unverdorbene Zeit betreffend.",
+      "ex": "Der Garten strahlte eine vorzeitliche Unschuld aus."
+    }
+  },
+  {
+    "slug": "anfractuous",
+    "en": {
+      "word": "Anfractuous",
+      "ipa": "/ænˈfræktʃuəs/",
+      "def": "Full of windings and intricate turnings.",
+      "ex": "They followed an anfractuous path through the cliffs."
+    },
+    "de": {
+      "word": "Verschlungen",
+      "ipa": "/fɛɐ̯ˈʃlʊŋn̩/",
+      "def": "Mit vielen Windungen und Krümmungen.",
+      "ex": "Sie folgten einem verschlungenen Pfad durch die Felsen."
+    }
+  },
+  {
+    "slug": "temerity",
+    "en": {
+      "word": "Temerity",
+      "ipa": "/təˈmɛrɪti/",
+      "def": "Excessive confidence or boldness; audacity.",
+      "ex": "She had the temerity to question the plan."
+    },
+    "de": {
+      "word": "Kühnheit",
+      "ipa": "/ˈkyːnhaɪ̯t/",
+      "def": "Übermäßige Selbstsicherheit; Wagemut.",
+      "ex": "Sie hatte die Kühnheit, den Plan infrage zu stellen."
+    }
+  },
+  {
+    "slug": "soporific",
+    "en": {
+      "word": "Soporific",
+      "ipa": "/ˌsɒpəˈrɪfɪk/",
+      "def": "Tending to induce drowsiness or sleep.",
+      "ex": "The lecturer’s soporific voice made him yawn."
+    },
+    "de": {
+      "word": "Schläfrig machend",
+      "ipa": "/ˈʃlɛːfʁɪç ˈmaxn̩t/",
+      "def": "Zum Einschlafen neigend oder Schlaf fördernd.",
+      "ex": "Die schläfrig machende Stimme des Dozenten ließ ihn gähnen."
+    }
+  },
+  {
+    "slug": "kenopsia",
+    "en": {
+      "word": "Kenopsia",
+      "ipa": "/kɛˈnɒpsiə/",
+      "def": "The eerie, forlorn atmosphere of a place usually bustling with people but now abandoned.",
+      "ex": "The empty school had a haunting kenopsia."
+    },
+    "de": {
+      "word": "Kenopsie",
+      "ipa": "/keˈnɔpsi̯e/",
+      "def": "Unheimliche Leere eines sonst belebten Ortes.",
+      "ex": "Die verlassene Schule hatte eine gespenstische Kenopsie."
+    }
+  },
+  {
+    "slug": "anemoia",
+    "en": {
+      "word": "Anemoia",
+      "ipa": "/ˌænɪˈmɔɪə/",
+      "def": "Nostalgia for a time you never knew.",
+      "ex": "Old photos filled her with anemoia for the 70s."
+    },
+    "de": {
+      "word": "Anemoiá",
+      "ipa": "/ˌanemoˈi̯aː/",
+      "def": "Sehnsucht nach einer Zeit, die man nie erlebt hat.",
+      "ex": "Alte Fotos weckten in ihr Anemoiá nach den 70ern."
+    }
+  },
+  {
+    "slug": "monachopsis",
+    "en": {
+      "word": "Monachopsis",
+      "ipa": "/ˌmɒnəˈkɒpsɪs/",
+      "def": "The subtle but persistent feeling of being out of place.",
+      "ex": "In the crowd he felt a twinge of monachopsis."
+    },
+    "de": {
+      "word": "Monachopsis",
+      "ipa": "/ˌmonaˈkɔpsɪs/",
+      "def": "Feines, anhaltendes Gefühl, nicht dazuzugehören.",
+      "ex": "In der Menge spürte er Monachopsis."
+    }
+  },
+  {
+    "slug": "ambedo",
+    "en": {
+      "word": "Ambedo",
+      "ipa": "/æmˈbiːdoʊ/",
+      "def": "A kind of melancholic trance in which you become absorbed in sensory details.",
+      "ex": "Rain on the window put her into ambedo."
+    },
+    "de": {
+      "word": "Ambedo",
+      "ipa": "/amˈbeːdo/",
+      "def": "Melancholische Versunkenheit in Sinneseindrücke.",
+      "ex": "Der Regen an der Scheibe versetzte sie in Ambedo."
+    }
+  },
+  {
+    "slug": "pareidolia",
+    "en": {
+      "word": "Pareidolia",
+      "ipa": "/ˌpærɪˈdoʊliə/",
+      "def": "Perceiving a pattern or image where none exists (e.g., faces in clouds).",
+      "ex": "Her pareidolia turned stains into maps."
+    },
+    "de": {
+      "word": "Pareidolie",
+      "ipa": "/paʁaɪ̯doˈliːə/",
+      "def": "Erkennen vermeintlicher Muster oder Bilder in Zufälligem.",
+      "ex": "Durch Pareidolie sah sie in Flecken Landkarten."
+    }
+  },
+  {
+    "slug": "lethologica",
+    "en": {
+      "word": "Lethologica",
+      "ipa": "/ˌlɛθəˈlɒdʒɪkə/",
+      "def": "The inability to remember a particular word or name.",
+      "ex": "He paused, struck by lethologica mid-sentence."
+    },
+    "de": {
+      "word": "Lethologie",
+      "ipa": "/letoˈloːɡiː/",
+      "def": "Vorübergehendes Nichtfinden eines bestimmten Wortes.",
+      "ex": "Mitten im Satz erlitt er Lethologie."
+    }
+  },
+  {
+    "slug": "hypnagogic",
+    "en": {
+      "word": "Hypnagogic",
+      "ipa": "/ˌhɪpnəˈɡɒdʒɪk/",
+      "def": "Relating to the transitional state from wakefulness to sleep.",
+      "ex": "Hypnagogic imagery flickered behind her eyelids."
+    },
+    "de": {
+      "word": "Hypnagog",
+      "ipa": "/hypnaˈɡoːk/",
+      "def": "Den Übergang vom Wachsein zum Schlaf betreffend.",
+      "ex": "Hypnagoge Bilder flimmerten hinter ihren Lidern."
+    }
+  },
+  {
+    "slug": "zugzwang",
+    "en": {
+      "word": "Zugzwang",
+      "ipa": "/ˈzuːktsvɑːŋ/",
+      "def": "A situation where any possible move worsens one's position (from chess).",
+      "ex": "Negotiations reached a political Zugzwang."
+    },
+    "de": {
+      "word": "Zugzwang",
+      "ipa": "/ˈt͡suːktsvaŋ/",
+      "def": "Lage, in der jeder Zug die Stellung verschlechtert (Schach).",
+      "ex": "Die Verhandlungen gerieten in einen Zugzwang."
+    }
+  },
+  {
+    "slug": "kummerspeck",
+    "en": {
+      "word": "Kummerspeck",
+      "ipa": "/ˈkʊmərˌspɛk/",
+      "def": "Weight gained from emotional overeating.",
+      "ex": "After the breakup he joked about his Kummerspeck."
+    },
+    "de": {
+      "word": "Kummerspeck",
+      "ipa": "/ˈkʊmɐʃpɛk/",
+      "def": "Durch Kummeressen zugenommenes Körpergewicht.",
+      "ex": "Nach der Trennung sprach er scherzhaft von Kummerspeck."
+    }
+  },
+  {
+    "slug": "torschlusspanik",
+    "en": {
+      "word": "Torschlusspanik",
+      "ipa": "/ˈtɔːrʃlʊsˌpɑːnɪk/",
+      "def": "The fear of diminishing opportunities as time passes.",
+      "ex": "Turning 30 gave her a touch of Torschlusspanik."
+    },
+    "de": {
+      "word": "Torschlusspanik",
+      "ipa": "/ˈtɔʁʃlʊsˌpaːnɪk/",
+      "def": "Angst, Chancen zu verpassen, je mehr Zeit vergeht.",
+      "ex": "Zum 30. Geburtstag spürte sie etwas Torschlusspanik."
+    }
+  },
+  {
+    "slug": "fremdschaemen",
+    "en": {
+      "word": "Fremdschämen",
+      "ipa": "/ˈfʁɛm(t)ˌʃeɪmən/",
+      "def": "Second-hand embarrassment.",
+      "ex": "The awkward speech caused widespread Fremdschämen."
+    },
+    "de": {
+      "word": "Fremdschämen",
+      "ipa": "/ˈfʁɛmtˌʃɛːmən/",
+      "def": "Schamempfinden für das Verhalten anderer.",
+      "ex": "Die peinliche Rede löste Fremdschämen aus."
+    }
+  },
+  {
+    "slug": "waldeinsamkeit",
+    "en": {
+      "word": "Waldeinsamkeit",
+      "ipa": "/ˈvaltˌaɪnzaːmkaɪt/",
+      "def": "The feeling of solitude and oneness with the forest.",
+      "ex": "She sought Waldeinsamkeit on long walks."
+    },
+    "de": {
+      "word": "Waldeinsamkeit",
+      "ipa": "/ˈvaltˌaɪ̯nzaːmkaɪ̯t/",
+      "def": "Einsamkeit und Verbundenheit im Wald.",
+      "ex": "Auf langen Spaziergängen suchte sie Waldeinsamkeit."
+    }
+  },
+  {
+    "slug": "weltanschauung",
+    "en": {
+      "word": "Weltanschauung",
+      "ipa": "/ˈvɛltanʃaʊʊŋ/",
+      "def": "A comprehensive worldview or philosophy of life.",
+      "ex": "His essays reveal a humanist Weltanschauung."
+    },
+    "de": {
+      "word": "Weltanschauung",
+      "ipa": "/ˈvɛltʔanˌʃaʊ̯ʊŋ/",
+      "def": "Umfassende persönliche Welt- und Lebensauffassung.",
+      "ex": "Seine Essays zeigen eine humanistische Weltanschauung."
+    }
+  },
+  {
+    "slug": "fingerspitzengefuehl",
+    "en": {
+      "word": "Fingerspitzengefühl",
+      "ipa": "/ˈfɪŋərˌʃpɪtsənɡəˌfjuːl/",
+      "def": "Intuitive tact or sensitivity in delicate situations.",
+      "ex": "Negotiations required real Fingerspitzengefühl."
+    },
+    "de": {
+      "word": "Fingerspitzengefühl",
+      "ipa": "/ˈfɪŋɐˌʃpɪt͡sn̩ɡəˌfyːl/",
+      "def": "Feines Gespür und Taktgefühl für heikle Lagen.",
+      "ex": "Die Verhandlungen erforderten echtes Fingerspitzengefühl."
+    }
+  },
+  {
+    "slug": "verschlimmbesserung",
+    "en": {
+      "word": "Verschlimmbesserung",
+      "ipa": "/fɛəʃlɪmˈbɛsərʊŋ/",
+      "def": "An intended improvement that makes things worse.",
+      "ex": "The update was a total Verschlimmbesserung."
+    },
+    "de": {
+      "word": "Verschlimmbesserung",
+      "ipa": "/fɛʁˌʃlɪmˈbɛsəʁʊŋ/",
+      "def": "Eine „Verbesserung“, die die Sache verschlechtert.",
+      "ex": "Das Update war eine reine Verschlimmbesserung."
+    }
+  },
+  {
+    "slug": "zweisamkeit",
+    "en": {
+      "word": "Zweisamkeit",
+      "ipa": "/ˈtsvaɪzɑːmkaɪt/",
+      "def": "The intimate togetherness of two people.",
+      "ex": "They treasured quiet Zweisamkeit on Sundays."
+    },
+    "de": {
+      "word": "Zweisamkeit",
+      "ipa": "/ˈt͡svaɪ̯zaːmkaɪ̯t/",
+      "def": "Innige Zweisamkeit zweier Menschen.",
+      "ex": "Sie genossen die ruhige Zweisamkeit am Sonntag."
+    }
+  },
+  {
+    "slug": "sprachgefuehl",
+    "en": {
+      "word": "Sprachgefühl",
+      "ipa": "/ˈʃprɑːxɡəˌfjuːl/",
+      "def": "An intuitive feel for a language’s nuances.",
+      "ex": "Her Sprachgefühl made her translations elegant."
+    },
+    "de": {
+      "word": "Sprachgefühl",
+      "ipa": "/ˈʃpʁaːxɡəˌfyːl/",
+      "def": "Intuitives Gespür für sprachliche Feinheiten.",
+      "ex": "Ihr Sprachgefühl machte die Übersetzungen elegant."
+    }
+  },
+  {
+    "slug": "drachenfutter",
+    "en": {
+      "word": "Drachenfutter",
+      "ipa": "/ˈdrɑːxənˌfʊtər/",
+      "def": "A peace offering (often a gift) after you've done something wrong.",
+      "ex": "He bought flowers as Drachenfutter."
+    },
+    "de": {
+      "word": "Drachenfutter",
+      "ipa": "/ˈdʁaxn̩ˌfʊtɐ/",
+      "def": "Versöhnungsgeschenk nach einem Fehltritt.",
+      "ex": "Er brachte als Drachenfutter Blumen mit."
+    }
+  },
+  {
+    "slug": "kopfkino",
+    "en": {
+      "word": "Kopfkino",
+      "ipa": "/ˈkɔpfkiːnoʊ/",
+      "def": "Vivid mental cinema; overactive imagination.",
+      "ex": "Her Kopfkino spun the scene into a drama."
+    },
+    "de": {
+      "word": "Kopfkino",
+      "ipa": "/ˈkɔpfˌkiːnoː/",
+      "def": "Lebhafte innere Bilder; überbordende Vorstellungskraft.",
+      "ex": "Ihr Kopfkino machte daraus gleich ein Drama."
+    }
+  },
+  {
+    "slug": "ohrwurm",
+    "en": {
+      "word": "Ohrwurm",
+      "ipa": "/ˈɔːrvʊəm/",
+      "def": "A catchy tune stuck in your head; an earworm.",
+      "ex": "That jingle is a total Ohrwurm."
+    },
+    "de": {
+      "word": "Ohrwurm",
+      "ipa": "/ˈoːɐ̯vʊʁm/",
+      "def": "Eingängige Melodie, die im Kopf hängen bleibt.",
+      "ex": "Dieser Jingle ist ein echter Ohrwurm."
+    }
+  },
+  {
+    "slug": "kuddelmuddel",
+    "en": {
+      "word": "Kuddelmuddel",
+      "ipa": "/ˈkʊdəlˌmʊdəl/",
+      "def": "A messy jumble; hodgepodge.",
+      "ex": "The drawer was a kuddelmuddel of cables."
+    },
+    "de": {
+      "word": "Kuddelmuddel",
+      "ipa": "/ˈkʊdl̩ˌmʊdl̩/",
+      "def": "Durcheinander; Wirrwarr.",
+      "ex": "Die Schublade war ein Kuddelmuddel aus Kabeln."
+    }
+  },
+  {
+    "slug": "zaungast",
+    "en": {
+      "word": "Zaungast",
+      "ipa": "/ˈtsaʊnˌɡɑːst/",
+      "def": "An onlooker watching from the sidelines without participating.",
+      "ex": "He stood as a Zaungast at the festival."
+    },
+    "de": {
+      "word": "Zaungast",
+      "ipa": "/ˈt͡saʊ̯nˌɡast/",
+      "def": "Unbeteiligter Beobachter am Rand.",
+      "ex": "Beim Fest stand er nur als Zaungast dabei."
+    }
+  },
+  {
+    "slug": "sturmfrei",
+    "en": {
+      "word": "Sturmfrei",
+      "ipa": "/ˈʃtʊrmfraɪ/",
+      "def": "Having the place to oneself when others are away.",
+      "ex": "With her parents gone, she enjoyed being sturmfrei."
+    },
+    "de": {
+      "word": "Sturmfrei",
+      "ipa": "/ˈʃtʊʁmˌfʁaɪ̯/",
+      "def": "Allein zuhause sein, weil die anderen weg sind.",
+      "ex": "Mit sturmfreiem Haus genoss sie die Ruhe."
+    }
+  }
+  ]
+}
