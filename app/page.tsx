@@ -3,6 +3,7 @@
 import { useWordOfTheDay } from '@/app/hooks/useWordOfTheDay'
 import LanguageToggle from '@/app/components/LanguageToggle'
 import WordCard from '@/app/components/WordCard'
+import Image from 'next/image'
 import {
   SignedIn,
   SignedOut,
@@ -47,7 +48,7 @@ export default function Home() {
             <SignInButton mode="modal">
               <button className="clerk-avatar-btn" aria-label="Sign in">
                 <span className="clerk-avatar-icon">
-                  👤
+                  <Image src={loginIcon} alt="Login" width={24} height={24} />
                 </span>
               </button>
             </SignInButton>
