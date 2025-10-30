@@ -17,10 +17,10 @@ export default function Home() {
     lang,
     currentEntry,
     isExhausted,
-    isFading,
+    isLoading,
+    message,
     labels,
     switchLanguage,
-    resetProgress
   } = useWordOfTheDay()
 
   return (
@@ -47,7 +47,7 @@ export default function Home() {
             <SignInButton mode="modal">
               <button className="clerk-avatar-btn" aria-label="Sign in">
                 <span className="clerk-avatar-icon">
-                  <img src={loginIcon.src} alt="Login" width={24} height={24} />
+                  👤
                 </span>
               </button>
             </SignInButton>
@@ -66,10 +66,8 @@ export default function Home() {
             entry={currentEntry}
             lang={lang}
             isExhausted={isExhausted}
-            isFading={isFading}
             emptyText={labels.empty}
-            resetText={labels.reset}
-            onReset={resetProgress}
+            fallbackMessage={isLoading ? 'Loading…' : message}
           />
 
           <div className="card-footer">

@@ -7,40 +7,33 @@ interface WordCardProps {
   } | null
   lang: 'en' | 'de'
   isExhausted: boolean
-  isFading: boolean
   emptyText: string
-  resetText: string
-  onReset: () => void
+  fallbackMessage?: string | null
 }
 
-export default function WordCard({ entry, lang, isExhausted, isFading, emptyText, resetText, onReset }: WordCardProps) {
+export default function WordCard({ entry, lang, isExhausted, emptyText, fallbackMessage }: WordCardProps) {
   if (!entry && !isExhausted) return null
 
-  if (isExhausted) {
+  if (isExhausted || !entry) {
+    const text = fallbackMessage && fallbackMessage.trim().length > 0 ? fallbackMessage : emptyText
     return (
       <div className="card">
-        <div className={`card-content ${isFading ? 'fade-out' : ''}`}>
+        <div className="card-content">
           <p className="word"></p>
           <p className="pronunciation is-hidden"></p>
-          <p className="definition">{emptyText}</p>
-          <p className="example">
-            <button className="btn-reset" onClick={onReset}>
-              {resetText}
-            </button>
-          </p>
+          <p className="definition">{text}</p>
+          <p className="example"></p>
         </div>
       </div>
     )
   }
-
-  if (!entry) return null
 
   const d = entry[lang]
   const hasIPA = !!(d.ipa && String(d.ipa).trim())
 
   return (
     <div className="card">
-      <div className={`card-content ${isFading ? 'fade-out' : 'fade-in'} ${!hasIPA ? 'no-ipa' : ''}`}>
+      <div className={`card-content ${!hasIPA ? 'no-ipa' : ''}`}>
         <p className="word">{d.word}</p>
         <p className={`pronunciation ${!hasIPA ? 'is-hidden' : ''}`}>{d.ipa}</p>
         <p className="definition">{d.def}</p>
