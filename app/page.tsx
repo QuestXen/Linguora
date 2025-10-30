@@ -3,6 +3,14 @@
 import { useWordOfTheDay } from '@/app/hooks/useWordOfTheDay'
 import LanguageToggle from '@/app/components/LanguageToggle'
 import WordCard from '@/app/components/WordCard'
+import {
+  SignedIn,
+  SignedOut,
+  UserButton,
+  SignInButton,
+} from '@clerk/nextjs'
+
+import loginIcon from '@/public/enter.png'
 
 export default function Home() {
   const {
@@ -17,9 +25,33 @@ export default function Home() {
 
   return (
     <>
-      <header>
-        <div className="header">
+      <header className="top-header">
+        <div className="header-left">
           <h1>Linguora</h1>
+        </div>
+
+        <div className="header-right">
+          {/* später kannst du hier auch Notifications reinmachen */}
+          <SignedIn>
+            <UserButton
+              afterSignOutUrl="/"
+              appearance={{
+                elements: {
+                  avatarBox: 'w-10 h-10',
+                },
+              }}
+            />
+          </SignedIn>
+
+          <SignedOut>
+            <SignInButton mode="modal">
+              <button className="clerk-avatar-btn" aria-label="Sign in">
+                <span className="clerk-avatar-icon">
+                  <img src={loginIcon.src} alt="Login" width={24} height={24} />
+                </span>
+              </button>
+            </SignInButton>
+          </SignedOut>
         </div>
       </header>
 

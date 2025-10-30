@@ -35,18 +35,77 @@ body {
   padding: 0;
 }
 
-header {
+header,
+.top-header {
   position: absolute;
   top: 2rem;
-  left: var(--gutter);
+  left: 0;
+  right: 0;
+  padding-inline: var(--gutter);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  z-index: 50;
 }
 
+.header-left h1,
 .header h1 {
   font-family: var(--font-domine);
   font-weight: 600;
   font-size: 2rem;
   margin: 0;
 }
+
+.header-right {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+/* der runde Button wenn ausgeloggt */
+.clerk-avatar-btn {
+  width: 42px;
+  height: 42px;
+  border-radius: 9999px;
+  border: 1px solid rgba(0,0,0,0.04);
+  background: #fff;
+  display: grid;
+  place-items: center;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.08);
+  cursor: pointer;
+  transition: transform 0.12s ease, box-shadow 0.12s ease;
+}
+
+.clerk-avatar-btn:hover {
+  box-shadow: 0 6px 18px rgba(0,0,0,0.12);
+}
+
+.clerk-avatar-icon {
+  font-size: 1.15rem;
+  line-height: 1;
+  color: #1b9d89;
+}
+
+/* mobile */
+@media (max-width: 600px) {
+  header,
+  .top-header {
+    top: 1.25rem;
+  }
+}
+
+/* globals.css */
+.cl-modal .cl-card {
+  border-radius: 1.5rem !important;
+  overflow: hidden !important;
+  background: #fff;
+}
+.cl-modal .cl-footer {
+  background: #fff;
+}
+
+
 
 /* REST DES CSS UNVERÄNDERT ÜBERNEHMEN */
 .page {
