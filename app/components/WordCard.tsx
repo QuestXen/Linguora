@@ -29,15 +29,21 @@ export default function WordCard({ entry, lang, isExhausted, emptyText, fallback
   }
 
   const d = entry[lang]
-  const hasIPA = !!(d.ipa && String(d.ipa).trim())
+  const word = d.word?.trim() ?? ''
+  const ipa = d.ipa?.trim() ?? ''
+  const definition = d.def?.trim() ?? ''
+  const example = d.ex?.trim() ?? ''
+  const hasIPA = ipa.length > 0
+  const hasDefinition = definition.length > 0
+  const hasExample = example.length > 0
 
   return (
     <div className="card">
       <div className={`card-content ${!hasIPA ? 'no-ipa' : ''}`}>
-        <p className="word">{d.word}</p>
-        <p className={`pronunciation ${!hasIPA ? 'is-hidden' : ''}`}>{d.ipa}</p>
-        <p className="definition">{d.def}</p>
-        <p className="example">{d.ex}</p>
+        <p className="word">{word}</p>
+        <p className={`pronunciation ${!hasIPA ? 'is-hidden' : ''}`}>{ipa}</p>
+        {hasDefinition ? <p className="definition">{definition}</p> : null}
+        {hasExample ? <p className="example">{example}</p> : null}
       </div>
     </div>
   )

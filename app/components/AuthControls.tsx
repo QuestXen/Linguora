@@ -27,6 +27,15 @@ type SessionEnvelope =
         emailVerified: boolean
         createdAt: string
         updatedAt: string
+        role?: string
+        hasDashboardAccess?: boolean
+        isBanned?: boolean
+        contributorState?: string
+      }
+      permissions?: {
+        dashboard?: boolean
+        reason?: string | null
+        isContributor?: boolean
       }
     }
   | null
@@ -48,7 +57,11 @@ const normalizeSession = (payload: unknown): SessionEnvelope => {
   return data as SessionEnvelope
 }
 
-export default function AuthControls() {
+interface AuthControlsProps {
+  mode?: 'default' | 'dashboard'
+}
+
+export default function AuthControls({ mode = 'default' }: AuthControlsProps = {}) {
   const [session, setSession] = useState<SessionEnvelope>(null)
   const [status, setStatus] = useState<'idle' | 'loading' | 'ready' | 'error'>('idle')
   const [authMenuOpen, setAuthMenuOpen] = useState(false)
@@ -175,6 +188,15 @@ export default function AuthControls() {
 
   if (session) {
     const avatarSrc = session.user.image || FALLBACK_AVATAR
+    const shouldShowDashboard = mode === 'default' && !!session.permissions?.dashboard
+    const primaryActionLabel = mode === 'dashboard' ? 'Home' : 'Dashboard'
+    const handlePrimaryAction = () => {
+      if (mode === 'dashboard') {
+        window.location.href = '/'
+      } else {
+        window.location.href = '/dashboard'
+      }
+    }
     return (
       <div className="auth-controls" ref={containerRef}>
         <div className="auth-dropdown">
@@ -194,6 +216,15 @@ export default function AuthControls() {
           </button>
           {userMenuOpen ? (
             <div role="menu" className="auth-dropdown-menu">
+              {shouldShowDashboard || mode === 'dashboard' ? (
+                <button
+                  type="button"
+                  className="auth-dropdown-item"
+                  onClick={handlePrimaryAction}
+                >
+                  {primaryActionLabel}
+                </button>
+              ) : null}
               <button type="button" className="auth-dropdown-item" onClick={signOut}>
                 Log out
               </button>

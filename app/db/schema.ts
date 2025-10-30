@@ -7,6 +7,7 @@ import {
   uniqueIndex,
   boolean,
   index,
+  integer,
 } from 'drizzle-orm/pg-core'
 import { relations } from 'drizzle-orm'
 
@@ -20,9 +21,21 @@ export const authUsers = pgTable(
     image: text('image'),
     createdAt: timestamp('created_at', { withTimezone: true }).notNull().defaultNow(),
     updatedAt: timestamp('updated_at', { withTimezone: true }).notNull().defaultNow(),
+    role: text('role').notNull().default('user'),
+    hasDashboardAccess: boolean('has_dashboard_access').notNull().default(false),
+    isBanned: boolean('is_banned').notNull().default(false),
+    bannedAt: timestamp('banned_at', { withTimezone: true }),
+    banReason: text('ban_reason'),
+    lastSeenAt: timestamp('last_seen_at', { withTimezone: true }),
+    contributorState: text('contributor_state').notNull().default('unknown'),
+    contributorCheckedAt: timestamp('contributor_checked_at', { withTimezone: true }),
+    contributorExpiresAt: timestamp('contributor_expires_at', { withTimezone: true }),
+    contributorLogin: text('contributor_login'),
   },
   table => ({
     emailIdx: uniqueIndex('auth_users_email_idx').on(table.email),
+    roleIdx: index('auth_users_role_idx').on(table.role),
+    contributorStateIdx: index('auth_users_contributor_state_idx').on(table.contributorState),
   }),
 )
 
@@ -112,12 +125,35 @@ export const wordSchedules = pgTable(
       .references(() => words.slug, { onDelete: 'cascade' }),
     scheduledFor: date('scheduled_for').notNull(),
     createdAt: timestamp('created_at', { withTimezone: true }).defaultNow().notNull(),
+    updatedAt: timestamp('updated_at', { withTimezone: true }).defaultNow().notNull(),
+    assignedByUserId: text('assigned_by_user_id').references(() => authUsers.id, {
+      onDelete: 'set null',
+    }),
+    isManual: boolean('is_manual').notNull().default(false),
   },
   table => ({
     scheduledForUnique: uniqueIndex('word_schedules_scheduled_for_key').on(
       table.scheduledFor,
     ),
-    slugUnique: uniqueIndex('word_schedules_slug_key').on(table.slug),
+    slugIdx: index('word_schedules_slug_idx').on(table.slug),
+  }),
+)
+
+export const wordHistory = pgTable(
+  'word_history',
+  {
+    id: serial('id').primaryKey(),
+    slug: text('slug')
+      .notNull()
+      .references(() => words.slug, { onDelete: 'cascade' }),
+    firstShownOn: date('first_shown_on').notNull(),
+    lastShownOn: date('last_shown_on').notNull(),
+    timesShown: integer('times_shown').notNull().default(1),
+    updatedAt: timestamp('updated_at', { withTimezone: true }).notNull().defaultNow(),
+  },
+  table => ({
+    slugUnique: uniqueIndex('word_history_slug_key').on(table.slug),
+    lastShownIdx: index('word_history_last_shown_idx').on(table.lastShownOn),
   }),
 )
 
@@ -128,9 +164,19 @@ export const wordScheduleRelations = relations(wordSchedules, ({ one }) => ({
   }),
 }))
 
+export const wordHistoryRelations = relations(wordHistory, ({ one }) => ({
+  word: one(words, {
+    fields: [wordHistory.slug],
+    references: [words.slug],
+  }),
+}))
+
 export type Word = typeof words.$inferSelect
 export type WordSchedule = typeof wordSchedules.$inferSelect
+export type WordHistory = typeof wordHistory.$inferSelect
 export type AuthUser = typeof authUsers.$inferSelect
 export type AuthAccount = typeof authAccounts.$inferSelect
 export type AuthSession = typeof authSessions.$inferSelect
 export type AuthVerification = typeof authVerifications.$inferSelect
+export type UserRole = AuthUser['role']
+export type ContributorState = AuthUser['contributorState']
