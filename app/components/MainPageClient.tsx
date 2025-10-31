@@ -22,7 +22,7 @@ import type { Language, WordOfTheDayPayload } from '@/app/lib/word-types'
 
 type TransitionPhase = 'idle' | 'fadeOut' | 'fadeIn'
 
-const CROSSFADE_DURATION_MS = 95
+const CROSSFADE_DURATION_MS = 80
 
 interface MainPageClientProps {
   initialData: WordOfTheDayPayload

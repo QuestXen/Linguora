@@ -30,12 +30,19 @@ const normalizeSession = (
     session: {
       id: session.id,
       userId: session.userId,
-      token: session.token ?? null,
+      token:
+        'token' in session ? ((session as { token?: string | null }).token ?? null) : null,
       expiresAt: sessionDateToString(session.expiresAt),
       createdAt: sessionDateToString(session.createdAt),
       updatedAt: sessionDateToString(session.updatedAt),
-      ipAddress: session.ipAddress ?? null,
-      userAgent: session.userAgent ?? null,
+      ipAddress:
+        'ipAddress' in session
+          ? ((session as { ipAddress?: string | null }).ipAddress ?? null)
+          : null,
+      userAgent:
+        'userAgent' in session
+          ? ((session as { userAgent?: string | null }).userAgent ?? null)
+          : null,
     },
     user: {
       id: user.id,
