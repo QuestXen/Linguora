@@ -10,12 +10,55 @@ import { SpeedInsights } from '@vercel/speed-insights/next'
 import { SessionProvider } from '@/app/components/SessionProvider'
 import { auth } from '@/app/lib/auth'
 import type { SessionEnvelope } from '@/app/lib/auth-types'
+import {
+  sessionDateToString,
+  sessionFieldToNullableString,
+} from '@/app/lib/auth-types'
 
 type AuthSessionResult = Awaited<ReturnType<typeof auth.api.getSession>>
 
-const isSessionEnvelope = (
+const normalizeSession = (
   payload: AuthSessionResult | null,
-): payload is SessionEnvelope => Boolean(payload?.session)
+): SessionEnvelope | null => {
+  if (!payload || !payload.session || !payload.user) {
+    return null
+  }
+
+  const { session, user, permissions } = payload
+
+  return {
+    session: {
+      id: session.id,
+      userId: session.userId,
+      token: session.token ?? null,
+      expiresAt: sessionDateToString(session.expiresAt),
+      createdAt: sessionDateToString(session.createdAt),
+      updatedAt: sessionDateToString(session.updatedAt),
+      ipAddress: session.ipAddress ?? null,
+      userAgent: session.userAgent ?? null,
+    },
+    user: {
+      id: user.id,
+      name: user.name ?? null,
+      email: user.email,
+      image: user.image ?? null,
+      emailVerified: user.emailVerified,
+      createdAt: sessionDateToString(user.createdAt),
+      updatedAt: sessionDateToString(user.updatedAt),
+      role: user.role ?? null,
+      hasDashboardAccess: user.hasDashboardAccess,
+      isBanned: user.isBanned,
+      bannedAt: sessionFieldToNullableString(user.bannedAt),
+      banReason: user.banReason ?? null,
+      lastSeenAt: sessionFieldToNullableString(user.lastSeenAt),
+      contributorState: user.contributorState ?? null,
+      contributorCheckedAt: sessionFieldToNullableString(user.contributorCheckedAt),
+      contributorExpiresAt: sessionFieldToNullableString(user.contributorExpiresAt),
+      contributorLogin: user.contributorLogin ?? null,
+    },
+    permissions,
+  }
+}
 
 export const metadata: Metadata = {
   title: 'Linguora',
@@ -43,9 +86,7 @@ export default async function RootLayout({
       return null
     })
 
-  const session: SessionEnvelope | null = isSessionEnvelope(sessionResponse)
-    ? sessionResponse
-    : null
+  const session = normalizeSession(sessionResponse)
 
   return (
     <html
